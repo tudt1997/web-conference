@@ -10,12 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     }
 } else {
     if (password_verify($_POST['password'], $_POST['current_password'])) {
+        $id = $_POST['id'];
         $name = $_POST['name'];
-        $username = $_POST['username'];
         $dob = $_POST['dob'];
         $gender = ($_POST['gender'] == 'Nam' ? 1 : 0);
         $phone = $_POST['phone'];
-        $email = $_POST['email'];
         $address = $_POST['address'];
         $hotel = $_POST['hotel'];
         $vehicle = $_POST['vehicle'];
@@ -31,27 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
          requirements = '$requirements'
          WHERE id = {$_POST['id']}";
         if (mysqli_query($conn, $sql)) {
-            echo "
-                  <script>
-                  window.alert('Cập nhật thành công');
-                  window.history.back();
-                  </script>
-                ";
-            header("location: ../account.php");
+            echo "Cập nhật thành công";
         } else {
-            echo "
-              <script>
-              window.alert('Cập nhật không thành công');
-              window.history.back();
-              </script>
-            ";
+            echo "Cập nhật không thành công";
         }
     } else {
-        echo "<script>
-          window.alert('Sai mật khẩu');
-//          window.history.back();
-          </script>
-          ";
+        echo "Sai mật khẩu";
     }
 
 }

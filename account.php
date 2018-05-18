@@ -162,7 +162,7 @@ else {
 <!--            </div>-->
 <!--            <h3>Thông tin cá nhân</h3>-->
             <?php echo '
-            <form class="form-horizontal" role="form" action="./controller/update_account.php" method="post">
+            <form class="form-horizontal" id="update" role="form">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Tên tài khoản:</label>
                     <div class="col-lg-8">
@@ -261,3 +261,17 @@ else {
 
 </body>
 </html>
+
+<script>
+    $('#update').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type     : "POST",
+            url      : './controller/update_account.php',
+            data     : $('#update').serialize(),
+            success  : function(result) {
+                window.alert(result);
+            }
+        });
+    });
+</script>

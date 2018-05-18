@@ -40,7 +40,7 @@ include './views/navbar.php';
             <!--                This is an <strong>.alert</strong>. Use this to show important messages to the user.-->
             <!--            </div>-->
             <!--            <h3>Thông tin cá nhân</h3>-->
-            <form class="form-horizontal" role="form" action="./controller/upload_article.php" method="post" enctype="multipart/form-data">
+            <form id="send" class="form-horizontal" role="form" action="controller/update_article.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Tên bài báo:</label>
                     <div class="col-lg-8">
@@ -66,3 +66,4 @@ include './views/navbar.php';
 <?php include './views/footer.php'; ?>
 </body>
 </html>
+

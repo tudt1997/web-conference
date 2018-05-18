@@ -44,7 +44,7 @@
                     </a>
                     <div class="dropdown-menu">
                         '; if ($_SESSION['id'] == 1)
-                            echo '<a class="dropdown-item" href="./manage_account.php">Quản lý</a>';
+                            echo '<a class="dropdown-item" href="./manage.php">Quản lý</a>';
                         echo '<a class="dropdown-item" href="./account.php">Thông tin cá nhân</a>
                         <a class="dropdown-item" href="./send_article.php"">Gửi bài</a>
                     </div>
@@ -63,7 +63,7 @@
 
 <div id="login" class="modal">
     <!-- Modal Content -->
-    <form class="modal-content animate">
+    <form id="login_form" class="modal-content animate">
         <div class="container">
             <h1>Đăng Nhập</h1>
             <p>Hãy điền thông tin tài khoản.</p>
@@ -87,7 +87,7 @@
 </div>
 
 <div id="register" class="modal">
-    <form class="modal-content animate">
+    <form id="register_form" class="modal-content animate">
         <div class="container">
             <h1>Đăng Ký</h1>
             <p>Hãy điền thông tin tạo tài khoản.</p>
@@ -96,6 +96,11 @@
                 <b>Tên tài khoản</b>
             </label>
             <input type="text" class="form-control" placeholder="Nhập tên tài khoản" name="username" id="username2" required>
+
+            <label for="uname">
+                <b>Họ và tên</b>
+            </label>
+            <input type="text" class="form-control" placeholder="Nhập họ và tên" name="name" id="name" required>
 
             <label for="psw">
                 <b>Mật khẩu</b>
@@ -127,17 +132,14 @@
         if (event.target === modalRegister) {
             modalRegister.style.display = "none";
         }
-    }
+    };
 
     $('#login').on('submit', function(e) {
         e.preventDefault();
-
-        const username = $("#username").val();
-        const password = $("#password").val();
         $.ajax({
             type     : "POST",
             url      : './controller/login.php',
-            data     : "username="+username+"&password="+password,
+            data     : $('#login_form').serialize(),
             success  : function(result) {
                 if (result !== '') {
                     window.alert(result);
@@ -152,14 +154,10 @@
 
     $('#register').on('submit', function(e) {
         e.preventDefault();
-
-        const username = $("#username2").val();
-        const password = $("#password2").val();
-        const confirm_password = $("#confirm_password").val();
         $.ajax({
             type     : "POST",
             url      : './controller/register.php',
-            data     : "username="+username+"&password="+password+"&confirm_password="+confirm_password,
+            data     : $('#register_form').serialize(),
             success  : function(result) {
                 if (result !== '') {
                     window.alert(result);
